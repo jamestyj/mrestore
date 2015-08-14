@@ -7,7 +7,7 @@
 # See https://github.com/jamestyj/mongo-scratch/tree/master/mrestore for
 # details.
 #
-# Version: 1.2.0
+# Version: 1.2.1
 # Author : James Tan <james.tan@mongodb.com>
 
 set -e
@@ -273,7 +273,7 @@ get_latest_snapshot() {
     echo "Data size         : $(format_size $data_size)"
     echo "Storage size      : $(format_size $storage_size)"
     echo "File size         : $(format_size $file_size) (uncompressed)"
-    ((part++))
+    ((part=part+1))
   done
 }
 
@@ -325,7 +325,7 @@ wait_for_restore() {
           local part_status=$(get_val "$res" "\"results\",$part,\"statusName\"" -f6 -d'"')
           [ ! "$part_status" ] && status="FINISHED" && break
           [ "$part_status" = "IN_PROGRESS" ] && break
-          ((part++))
+          ((part=part+1))
         done
 
         if [ "$status" != "IN_PROGRESS" ]; then
@@ -336,7 +336,7 @@ wait_for_restore() {
             local url=$(get_val "$res" "\"results\",$part,\"delivery\",\"url\"" -f8 -d'"')
             [ ! "$url" ] && break
             DOWNLOAD_URLS+=($url)
-            ((part++))
+            ((part=part+1))
           done
           break
         fi
