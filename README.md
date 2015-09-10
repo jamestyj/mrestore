@@ -17,7 +17,7 @@ bugs via Github Issues or better yet, send fixes and patches via pull requests.
 
 In the Cloud/Ops Manager web UI:
 
-  1. Enable Public API for the MMS group to restore from
+  1. Enable Public API for the Cloud/Ops Manager group to restore from
   2. Generate an API key
   3. Whitelist the IP address from which `mrestore` is run
   4. Go to the URL of the replica set or cluster that you want to restore,
@@ -34,11 +34,11 @@ For details, refer to the [REST API documentation](https://docs.cloud.mongodb.co
     Usage: mrestore.sh PARAMS [OPTIONS]
 
     Required parameters:
-      --server-url MMS_URL     MMS server URL (eg. https://cloud.mongodb.com)
-      --user MMS_USER          MMS username, usually an email
-      --api-key API_KEY        MMS API key (eg. xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
-      --group-id GROUP_ID      MMS group ID   (eg. 54c64146ae9fbe3d7f32c726)
-      --cluster-id CLUSTER_ID  MMS cluster ID (eg. 54c641560cf294969781b5c3)
+      --server-url URL         Cloud/Ops Manager server URL (eg. https://cloud.mongodb.com)
+      --user USER              Cloud/Ops Manager username, usually an email
+      --api-key API_KEY        Cloud/Ops Manager API key (eg. xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+      --group-id GROUP_ID      Cloud/Ops Manager group ID   (eg. 54c64146ae9fbe3d7f32c726)
+      --cluster-id CLUSTER_ID  Cloud/Ops Manager cluster ID (eg. 54c641560cf294969781b5c3)
 
     Options:
       --out-dir DIRECTORY      Download directory. Default: '.'

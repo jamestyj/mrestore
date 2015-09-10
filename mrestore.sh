@@ -140,11 +140,11 @@ usage() {
   echo "Usage: $self PARAMS [OPTIONS]"
   echo
   echo "Required parameters:"
-  echo "  --server-url MMS_URL     MMS server URL (eg. https://mms.mongodb.com)"
-  echo "  --user MMS_USER          MMS username, usually an email"
-  echo "  --api-key API_KEY        MMS API key (eg. xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)"
-  echo "  --group-id GROUP_ID      MMS group ID   (eg. 54c64146ae9fbe3d7f32c726)"
-  echo "  --cluster-id CLUSTER_ID  MMS cluster ID (eg. 54c641560cf294969781b5c3)"
+  echo "  --server-url URL         Cloud/Ops Manager server URL (eg. https://cloud.mongodb.com)"
+  echo "  --user USER              Cloud/Ops Manager username, usually an email"
+  echo "  --api-key API_KEY        Cloud/Ops Manager API key (eg. xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)"
+  echo "  --group-id GROUP_ID      Cloud/Ops Manager group ID   (eg. 54c64146ae9fbe3d7f32c726)"
+  echo "  --cluster-id CLUSTER_ID  Cloud/Ops Manager cluster ID (eg. 54c641560cf294969781b5c3)"
   echo
   echo "Options:"
   echo "  --out-dir DIRECTORY      Download directory. Default: '$OUT_DIR'"
@@ -210,7 +210,7 @@ get_cluster_info() {
     elif echo "$res" | grep -q ": 401"; then
       echo "ERROR: Ensure that the user and API key are correct"
     else
-      echo "ERROR: Can't reach MMS at $MMS_SERVER_URL"
+      echo "ERROR: Can't reach Cloud/Ops Manager at $MMS_SERVER_URL"
     fi
     exit 1
   fi
@@ -236,7 +236,7 @@ get_latest_snapshot() {
   local res=$(api_get '/snapshots')
   if echo "$res" | grep -q "curl: ("; then
     echo "$res"
-    echo "ERROR: Can't reach MMS at $MMS_SERVER_URL"
+    echo "ERROR: Can't reach Cloud/Ops Manager at $MMS_SERVER_URL"
     exit 1
   fi
 
@@ -281,9 +281,9 @@ restore_snapshot() {
   if echo "$res" | grep -q "curl: ("; then
     echo "$res"
     if echo "$res" | grep -q ": 403"; then
-      echo "ERROR: Ensure that this IP address is whitelisted in MMS"
+      echo "ERROR: Ensure that this IP address is whitelisted in Cloud/Ops Manager"
     else
-      echo "ERROR: Can't reach MMS at $MMS_SERVER_URL"
+      echo "ERROR: Can't reach Cloud/Ops Manager at $MMS_SERVER_URL"
     fi
     exit 1
   fi
